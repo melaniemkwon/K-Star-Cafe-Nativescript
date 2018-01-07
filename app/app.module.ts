@@ -4,6 +4,7 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedrawer/angular";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
+import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 import { HomeComponent } from "./home/home.component";
 import { MenuComponent } from "./menu/menu.component";
@@ -22,9 +23,6 @@ import { baseURL } from "./shared/baseurl";
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
-// Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
-// import { NativeScriptHttpModule } from "nativescript-angular/http";
-
 @NgModule({
     bootstrap: [
         AppComponent
@@ -33,7 +31,10 @@ import { baseURL } from "./shared/baseurl";
         NativeScriptModule,
         AppRoutingModule,
         NativeScriptHttpModule,
-        NativeScriptUISideDrawerModule
+        NativeScriptUISideDrawerModule,
+        TNSFontIconModule.forRoot({
+            'fa': './fonts/font-awesome.min.css'
+        })
     ],
     declarations: [
         AppComponent,
