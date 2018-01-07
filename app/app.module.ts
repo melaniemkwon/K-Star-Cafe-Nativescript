@@ -1,6 +1,8 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedrawer/angular";
 import { NativeScriptUIListViewModule } from 'nativescript-telerik-ui/listview/angular';
 import { AppRoutingModule } from "./app.routing";
@@ -14,6 +16,7 @@ import { DrawerComponent } from "./shared/drawer/drawer.component";
 import { ContactComponent } from "./contact/contact.component";
 import { AboutComponent } from "./about/about.component";
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ReservationComponent } from "./reservation/reservation.component";
 
 import { DishService } from "./services/dish.service";
 import { PromotionService } from "./services/promotion.service";
@@ -22,9 +25,6 @@ import { FavoriteService } from "./services/favorite.service";
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
 
 import { baseURL } from "./shared/baseurl";
-
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @NgModule({
     bootstrap: [
@@ -38,7 +38,9 @@ import { baseURL } from "./shared/baseurl";
         TNSFontIconModule.forRoot({
             'fa': './fonts/font-awesome.min.css'
         }),
-        NativeScriptUIListViewModule
+        NativeScriptUIListViewModule,
+        NativeScriptFormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
@@ -48,7 +50,8 @@ import { baseURL } from "./shared/baseurl";
         DrawerComponent,
         ContactComponent,
         AboutComponent,
-        FavoritesComponent
+        FavoritesComponent,
+        ReservationComponent
     ],
     providers: [
         DishService,
