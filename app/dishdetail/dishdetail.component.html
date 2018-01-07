@@ -9,6 +9,13 @@
                 <Label class="h2" [text]="dish.name"></Label>
                 <Label class="body" [text]="dish.description" textWrap="true"></Label>
             </StackLayout>
+            <GridLayout orientation="horizontal" rows="*" columns="*, *, *" class="m-t-20">
+                <Button row="0" col="0" [text]="avgstars + ' stars'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="1" [text]="numcomments + ' comments'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="2" [text]="(favorite ? 'fa-heart' : 'fa-heart-o') | fonticon" 
+                    class="btn btn-rounded-sm btn-outline no-border fa"
+                    (tap)="addToFavorites()"></Button>
+            </GridLayout>
         </StackLayout>
         <Label row="1" height="40" class="p-10 m-t-10 h3" text="Comments"></Label>
         <ListView row="2" height="500" [items]="dish.comments" class="list-group">
@@ -29,4 +36,4 @@
     </GridLayout>
     <ActivityIndicator busy="true"  *ngIf="!(dish || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
     <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>
-</ScrollView>
+</ScrollView> 
