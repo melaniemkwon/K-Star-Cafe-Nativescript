@@ -1,0 +1,19 @@
+<StackLayout class="modal-view-style" [formGroup]="commentForm" class="m-35">
+
+    <StackLayout>
+        <Label class="label" text="Name" textWrap="true"></Label>
+        <TextField formControlName="author" class="input input-border" hint="Name" text=""></TextField>
+    </StackLayout>
+
+    <StackLayout>
+    <Label class="label" text="Rating" textWrap="true"></Label>
+    <Slider formControlName="rating" value="5" minValue="0" maxValue="5"></Slider>
+    </StackLayout>
+
+    <StackLayout>
+    <Label class="label" text="Comment" textWrap="true"></Label>
+    <TextField formControlName="comment" class="input input-border" hint="Comment..." text=""></TextField>
+    </StackLayout>
+
+    <Button class="btn btn-primary btn-active" text="Add Comment" (tap)="onSubmit()"></Button>
+</StackLayout>

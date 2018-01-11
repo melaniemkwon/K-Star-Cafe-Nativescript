@@ -1,13 +1,18 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { Comment } from '../shared/comment';
 import { DishService } from '../services/dish.service';
 import { FavoriteService } from '../services/favorite.service';
+import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { CommentComponent } from "../comment/comment.component";
+
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Toasty } from 'nativescript-toasty';
+import { action } from "ui/dialogs";
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dishdetail',
@@ -29,6 +34,8 @@ export class DishdetailComponent implements OnInit {
         private fonticon: TNSFontIconService,
         private route: ActivatedRoute,
         private routerExtensions: RouterExtensions,
+        private modalService: ModalDialogService, 
+        private vcRef: ViewContainerRef,
         @Inject('BaseURL') private BaseURL) {
 
     }
@@ -58,5 +65,42 @@ export class DishdetailComponent implements OnInit {
 
     goBack(): void {
         this.routerExtensions.back();
+    }
+    
+    displayActionDialog() {
+        let options = {
+            title: "Actions",
+            cancelButtonText: "Cancel",
+            actions: ["Add to Favorites", "Add Comment"]
+        };
+
+        action(options).then((result) => {
+            if (result === "Add to Favorites") {
+                this.addToFavorites();
+            } else if (result === "Add Comment") {
+                this.createModalView("Add Comment");
+            }
+        });
+    }
+
+    createModalView(args) {
+
+        let options: ModalDialogOptions = {
+            viewContainerRef: this.vcRef,
+            context: args,
+            fullscreen: false
+        };
+
+        this.modalService.showModal(CommentComponent, options)
+            .then((comment: any) => {
+                if (args === "Add Comment") {
+                    if (comment) {
+                        this.dish.comments.push(comment);
+                        // console.log(JSON.stringify(comment));
+                        // console.log(JSON.stringify(this.dish.comments));
+                    }
+                }
+            });
+
     }
 }
