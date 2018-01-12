@@ -4,10 +4,7 @@
 	"readme": "NativeScript Application",
 	"repository": "<fill-your-repository-here>",
 	"nativescript": {
-		"id": "org.nativescript.KStarCafe",
-		"tns-android": {
-			"version": "3.4.1"
-		}
+		"id": "org.nativescript.KStarCafe"
 	},
 	"dependencies": {
 		"@angular/animations": "~5.0.0",
