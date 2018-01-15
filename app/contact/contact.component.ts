@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DrawerPage } from '../shared/drawer/drawer.page';
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
+import * as Email from 'nativescript-email';
 
 @Component({
   selector: 'app-contact',
@@ -8,8 +10,23 @@ import { DrawerPage } from '../shared/drawer/drawer.page';
 })
 export class ContactComponent extends DrawerPage {
 
-  constructor(private changeDetectorRef:ChangeDetectorRef) {
+  constructor(private changeDetectorRef:ChangeDetectorRef,
+    private fonticon: TNSFontIconService) {
     super(changeDetectorRef);
   }
 
+  sendEmail() {
+    Email.available()
+      .then((avail: boolean) => {
+        if (avail) {
+          Email.compose({
+            to: ['kstarcafe@food.net'],
+            subject: 'Hello',
+            body: 'Dear Sir/Madam:'
+          });
+        } else {
+          console.log("No email configured.");
+        }
+      })
+  }
 }
